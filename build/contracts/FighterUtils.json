@@ -1,0 +1,501 @@
+{
+  "contractName": "FighterUtils",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/FighterUtils.sol\":\"FighterUtils\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/FighterUtils.sol\":{\"keccak256\":\"0xabf73ba5ec41582cba855a6420189a94b09096a82c0dd268674a7547fd7068a1\",\"urls\":[\"bzz-raw://9f2ff0cc800f2f629dc13577d0a1127298f1f99ef8067bdd3b90a6837d6ca2fd\",\"dweb:/ipfs/QmVtfknV3hteX1jxd88k3baQK5btEA7NffazrgNFRNhUjS\"]}},\"version\":1}",
+  "bytecode": "0x6080604052662386f26fc10000600055348015601a57600080fd5b50603f8060286000396000f3fe6080604052600080fdfea2646970667358221220c99596ad36ed1d9fdde18f68b03784a8341f5d50560a59f15504a0d86be419d264736f6c634300080a0033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220c99596ad36ed1d9fdde18f68b03784a8341f5d50560a59f15504a0d86be419d264736f6c634300080a0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "27:238:2:-:0;;;115:10;93:32;;27:238;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "27:238:2:-:0;;;;;",
+  "source": "pragma solidity ^0.8.9;\r\n\r\ncontract FighterUtils { // Create the modifier for the fee\r\n\r\n    uint256 private fee = 0.01 ether;\r\n\r\n    modifier checkFee {\r\n        require(msg.value == fee, 'You dont have enough fee for the transaction');\r\n        _;\r\n    }\r\n    \r\n}",
+  "sourcePath": "C:\\Users\\alber\\Desktop\\solidityApp\\nft\\contracts\\FighterUtils.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/FighterUtils.sol",
+    "exportedSymbols": {
+      "FighterUtils": [
+        407
+      ]
+    },
+    "id": 408,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 391,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "FighterUtils",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 407,
+        "linearizedBaseContracts": [
+          407
+        ],
+        "name": "FighterUtils",
+        "nameLocation": "36:12:2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 394,
+            "mutability": "mutable",
+            "name": "fee",
+            "nameLocation": "109:3:2",
+            "nodeType": "VariableDeclaration",
+            "scope": 407,
+            "src": "93:32:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 392,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "93:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "hexValue": "302e3031",
+              "id": 393,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "115:10:2",
+              "subdenomination": "ether",
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_10000000000000000_by_1",
+                "typeString": "int_const 10000000000000000"
+              },
+              "value": "0.01"
+            },
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 405,
+              "nodeType": "Block",
+              "src": "152:104:2",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 400,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 397,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4294967281,
+                            "src": "171:3:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 398,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "value",
+                          "nodeType": "MemberAccess",
+                          "src": "171:9:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "id": 399,
+                          "name": "fee",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 394,
+                          "src": "184:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "171:16:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "596f7520646f6e74206861766520656e6f7567682066656520666f7220746865207472616e73616374696f6e",
+                        "id": 401,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "189:46:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_273621b5c587695f81850d75fe357e4132a285da772e8483f180806e2a9bbf88",
+                          "typeString": "literal_string \"You dont have enough fee for the transaction\""
+                        },
+                        "value": "You dont have enough fee for the transaction"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_273621b5c587695f81850d75fe357e4132a285da772e8483f180806e2a9bbf88",
+                          "typeString": "literal_string \"You dont have enough fee for the transaction\""
+                        }
+                      ],
+                      "id": 396,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "163:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 402,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "163:73:2",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 403,
+                  "nodeType": "ExpressionStatement",
+                  "src": "163:73:2"
+                },
+                {
+                  "id": 404,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "247:1:2"
+                }
+              ]
+            },
+            "id": 406,
+            "name": "checkFee",
+            "nameLocation": "143:8:2",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 395,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "152:0:2"
+            },
+            "src": "134:122:2",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 408,
+        "src": "27:238:2",
+        "usedErrors": []
+      }
+    ],
+    "src": "0:265:2"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/FighterUtils.sol",
+    "exportedSymbols": {
+      "FighterUtils": [
+        407
+      ]
+    },
+    "id": 408,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 391,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "FighterUtils",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 407,
+        "linearizedBaseContracts": [
+          407
+        ],
+        "name": "FighterUtils",
+        "nameLocation": "36:12:2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 394,
+            "mutability": "mutable",
+            "name": "fee",
+            "nameLocation": "109:3:2",
+            "nodeType": "VariableDeclaration",
+            "scope": 407,
+            "src": "93:32:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 392,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "93:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "hexValue": "302e3031",
+              "id": 393,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "115:10:2",
+              "subdenomination": "ether",
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_10000000000000000_by_1",
+                "typeString": "int_const 10000000000000000"
+              },
+              "value": "0.01"
+            },
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 405,
+              "nodeType": "Block",
+              "src": "152:104:2",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 400,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 397,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4294967281,
+                            "src": "171:3:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 398,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "value",
+                          "nodeType": "MemberAccess",
+                          "src": "171:9:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "id": 399,
+                          "name": "fee",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 394,
+                          "src": "184:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "171:16:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "596f7520646f6e74206861766520656e6f7567682066656520666f7220746865207472616e73616374696f6e",
+                        "id": 401,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "189:46:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_273621b5c587695f81850d75fe357e4132a285da772e8483f180806e2a9bbf88",
+                          "typeString": "literal_string \"You dont have enough fee for the transaction\""
+                        },
+                        "value": "You dont have enough fee for the transaction"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_273621b5c587695f81850d75fe357e4132a285da772e8483f180806e2a9bbf88",
+                          "typeString": "literal_string \"You dont have enough fee for the transaction\""
+                        }
+                      ],
+                      "id": 396,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "163:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 402,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "163:73:2",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 403,
+                  "nodeType": "ExpressionStatement",
+                  "src": "163:73:2"
+                },
+                {
+                  "id": 404,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "247:1:2"
+                }
+              ]
+            },
+            "id": 406,
+            "name": "checkFee",
+            "nameLocation": "143:8:2",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 395,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "152:0:2"
+            },
+            "src": "134:122:2",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 408,
+        "src": "27:238:2",
+        "usedErrors": []
+      }
+    ],
+    "src": "0:265:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.10+commit.fc410830.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-01-16T01:01:18.345Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

@@ -1,0 +1,11 @@
+<div>
+    <alert></alert>
+    <button type="submit" class="button" (click)="connect()">Connect Metamask</button>
+    <form [formGroup]="changeNameForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="changeName">New name</label>
+            <input formControlName="name" type="text" id="changeName" required>
+        </div>
+        <button class="button" type="submit">Confirm</button>
+    </form>
+</div>

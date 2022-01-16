@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "compile": "npx truffle compile",
+    "start:ganache": "npx ganache-cli --deterministic",
+    "deploy:dev": "npx truffle migrate --network development",
+    "start:truffle": "npx truffle console --network development",
+    "deploy:start": "npm run deploy:dev && npm run start:truffle",
+    "launch:script": "npx truffle exec --network development ./scripts/index.js",
+    "test": "npx truffle test"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.4.1",
+    "@truffle/hdwallet-provider": "^2.0.0",
+    "chai": "^4.3.4",
+    "ganache-cli": "^6.12.2",
+    "web3": "^1.6.1"
+  },
+  "dependencies": {
+    "ethers": "^5.5.3"
+  }
+}
