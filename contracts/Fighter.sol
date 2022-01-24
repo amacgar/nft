@@ -20,7 +20,7 @@ contract Fighter{
     mapping (uint => address) fighterOwner;
     mapping (address => uint[]) ownerFighters;
 
-    function generateFighter() public { // TODO cambiarla de public a internal
+    function generateFighter() public returns(uint256){ // TODO cambiarla de public a internal
         uint id = fighters.length + 1;
         uint8 dmg = uint8(generateRandomNumber(249));
         uint8 speed = uint8(generateRandomNumber(99));
@@ -29,9 +29,10 @@ contract Fighter{
         ownerFighters[msg.sender].push(id);
         fighterOwner[id] = msg.sender;
         emit FighterGenerated(id, name, dmg, speed);
+        return id;
     }
     
-    function generateRandomNumber(uint max) private view returns (uint) {
+    function generateRandomNumber(uint _max) private view returns (uint) {
         uint result = uint8(
             uint256(
                 keccak256(
@@ -41,22 +42,21 @@ contract Fighter{
                         msg.sender
                     )
                 )
-            ) % (max - 1)
+            ) % (_max - 1)
         );
         return result;
     }
 
-    function modifyName(uint256 id, string memory newName) internal {
-        fighters[id-1].name = newName;
-        emit NameChanged(id, newName);
+    function modifyName(uint256 _id, string memory _newName) internal {
+        fighters[_id-1].name = _newName;
+        emit NameChanged(_id, _newName);
     }
 
     function getFighters() public view returns(FighterPersonality[] memory) { // TODO Esta funcion no debe existir
         return fighters;
     }
 
-    function getFighterOwner(uint id) public view returns(address) { // TODO Esta funcion no debe existir
-        return fighterOwner[id];
+    function getFighterOwner(uint _id) public view returns(address) { // TODO Esta funcion no debe existir
+        return fighterOwner[_id];
     }
-    
 }

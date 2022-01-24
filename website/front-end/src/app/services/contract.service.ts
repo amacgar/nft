@@ -15,8 +15,12 @@ export class ContractService {
 
   private Web3 = require('web3');
 
+  private fighterContract: any;
+
   private tokenAbi = require('../../assets/abi/MainFighter.json');
-  private contracAddress = '0xECbd22697770729CBf6C755696CA9bF763f9f16D';
+  private contracAddress = '0x9652E6EB3dA78114767eD2F06dF6083DF742f08D';
+  private symbol = 'FT';
+  private decimals = 0;
   private web3: any;
   private tokenContract: any;
   private userAccount: any = [];
@@ -25,6 +29,7 @@ export class ContractService {
     if (typeof window.web3 !== undefined) {
       this.web3 = new this.Web3(window.web3.currentProvider);
     }
+    this.connectContract();
   }
 
   /**
@@ -75,6 +80,41 @@ export class ContractService {
   }
 
   /**
+   * @function addTokenToMetamask
+   * 
+   * @description Add the token identifier to the metamask of the user
+   * 
+   * @author Alberto Machado | amacgar
+   * 
+   * @param ethereum 
+   */
+  async addTokenToMetamask(ethereum: any) {
+    try {
+      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+      const wasAdded = await ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC721', // Initially only supports ERC20, but eventually more!
+          options: {
+            address: this.contracAddress, // The address that the token is at.
+            symbol: this.symbol, // A ticker symbol or shorthand, up to 5 chars.
+            decimals: this.decimals, // The number of decimals in the token
+            image: '', // A string url of the token logo
+          },
+        },
+      });
+
+      if (wasAdded) {
+        console.log('Thanks for your interest!');
+      } else {
+        console.log('Your loss!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  /**
    * @function requestAccess
    * 
    * @description If the user is not logged in Metamask send a request to log in
@@ -89,6 +129,7 @@ export class ContractService {
         method: "eth_requestAccounts",
       });
       this.alertService.success(`You are logged now with ${this.userAccount[0]}!!`, this.options);
+      this.addTokenToMetamask(ethereum);
       return true;
     } catch (e) {
       this.alertService.error('Something happened and you are not logged =(', this.options);
@@ -97,10 +138,41 @@ export class ContractService {
   }
 
   async connectContract() {
-    this.web3.eth.contract(this.tokenAbi).at(this.contracAddress);
+    this.fighterContract = new this.web3.eth.Contract(this.tokenAbi.abi, this.contracAddress);
   }
 
   async getUserBalance() {
     
+  }
+
+  async buyFighter() {
+    await this.fighterContract.methods.buyFighter().send({ from: this.userAccount[0], value: this.web3.utils.toWei('0.01', 'ether')});
+  }
+
+  async getAllFighters() {
+    return await this.fighterContract.methods.getAllFighters().call();
+  }
+
+  async getFighter(id: number) {
+    return await this.fighterContract.methods.getOwnFighter(id).call();
+  }
+
+  async getEvents() {
+    let latest_block = await this.web3.eth.getBlockNumber();
+    let historical_block = latest_block - 10000; // you can also change the value to 'latest' if you have a upgraded rpc
+    console.log("latest: ", latest_block, "historical block: ", historical_block);
+    const events = await this.fighterContract.getPastEvents(
+        'FighterGenerated', // change if your looking for a different event
+        { fromBlock: historical_block, toBlock: 'latest' }
+    );
+    return events;
+  };
+
+  getUserAccount() {
+    return this.userAccount;
+  }
+
+  async changeName(id: string, name: string) {
+    await this.fighterContract.methods.changeName(parseInt(id, 10), name).send({ from: this.userAccount[0], value: this.web3.utils.toWei('0.01', 'ether')});
   }
 }
