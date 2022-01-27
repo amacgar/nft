@@ -29,7 +29,6 @@ export class NftComponent implements OnInit {
       await this.contractService.buyFighter();
       console.log("Successful buy");
     } catch (e) {
-      console.log(e);
     }
   }
 
@@ -55,6 +54,10 @@ export class NftComponent implements OnInit {
   async getEvents() {
     const events = await this.contractService.getEvents();
     console.log(events);
+  }
+
+  async getBalanceFromContract() {
+    await this.contractService.transferBalanceToOwner();
   }
 
 }

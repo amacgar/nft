@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertService } from '../components/alert';
+import { ErrorsService } from './errors.service';
 
 declare let require: any;
 declare let window: any;
@@ -18,14 +19,14 @@ export class ContractService {
   private fighterContract: any;
 
   private tokenAbi = require('../../assets/abi/MainFighter.json');
-  private contracAddress = '0x9652E6EB3dA78114767eD2F06dF6083DF742f08D';
+  private contractAddress = '0x1D11f65E5dB5A30af235675B646C83ED74Ec14b4';
   private symbol = 'FT';
   private decimals = 0;
   private web3: any;
   private tokenContract: any;
   private userAccount: any = [];
 
-  constructor(protected alertService: AlertService) {
+  constructor(protected alertService: AlertService, protected errors: ErrorsService) {
     if (typeof window.web3 !== undefined) {
       this.web3 = new this.Web3(window.web3.currentProvider);
     }
@@ -96,7 +97,7 @@ export class ContractService {
         params: {
           type: 'ERC721', // Initially only supports ERC20, but eventually more!
           options: {
-            address: this.contracAddress, // The address that the token is at.
+            address: this.contractAddress, // The address that the token is at.
             symbol: this.symbol, // A ticker symbol or shorthand, up to 5 chars.
             decimals: this.decimals, // The number of decimals in the token
             image: '', // A string url of the token logo
@@ -138,7 +139,7 @@ export class ContractService {
   }
 
   async connectContract() {
-    this.fighterContract = new this.web3.eth.Contract(this.tokenAbi.abi, this.contracAddress);
+    this.fighterContract = new this.web3.eth.Contract(this.tokenAbi.abi, this.contractAddress);
   }
 
   async getUserBalance() {
@@ -146,7 +147,11 @@ export class ContractService {
   }
 
   async buyFighter() {
-    await this.fighterContract.methods.buyFighter().send({ from: this.userAccount[0], value: this.web3.utils.toWei('0.01', 'ether')});
+    try {
+      await this.fighterContract.methods.buyFighter().send({ from: this.userAccount[0], value: this.web3.utils.toWei('0.01', 'ether')});
+    } catch (e) {
+      this.errors.throwError(e);
+    }
   }
 
   async getAllFighters() {
@@ -173,6 +178,18 @@ export class ContractService {
   }
 
   async changeName(id: string, name: string) {
-    await this.fighterContract.methods.changeName(parseInt(id, 10), name).send({ from: this.userAccount[0], value: this.web3.utils.toWei('0.01', 'ether')});
+    try {
+      await this.fighterContract.methods.changeName(parseInt(id, 10), name).send({ from: this.userAccount[0], value: this.web3.utils.toWei('0.01', 'ether')});
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async transferBalanceToOwner() {
+    try {
+      await this.fighterContract.methods.getContractBalance().send({ from: this.userAccount[0]});
+    } catch (e) {
+      this.errors.throwError(e);
+    }
   }
 }

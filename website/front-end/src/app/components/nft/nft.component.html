@@ -1,36 +1,97 @@
 <div>
   <alert></alert>
-  <button mdbBtn type="button" color="success" [rounded]="true" [outline]="true" mdbWavesEffect (click)="connect()">Connect Metamask</button>
-  <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="buyFighter()">Buy fighter</button>
-  <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="getAllFighters()">Get fighters</button>
-  <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="getEvents()">Get events</button>
+  <button
+    mdbBtn
+    type="button"
+    color="success"
+    [rounded]="true"
+    [outline]="true"
+    mdbWavesEffect
+    (click)="connect()"
+  >
+    Connect Metamask
+  </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="buyFighter()"
+  >
+    Buy fighter
+  </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getAllFighters()"
+  >
+    Get fighters
+  </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getEvents()"
+  >
+    Get events
+  </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getBalanceFromContract()"
+  >
+    Transfer balance to owner
+  </button>
   <div>
-    <div *ngFor="let fighter of fighters">
-      <mdb-card>
-        <!--Card image-->
-        <mdb-card-img src="../../../assets/images/Dungeon.Fighter.Online.full.417211.jpg" alt="Card image cap"></mdb-card-img>
-        <!--Card content-->
-        <mdb-card-body>
-      
-          <!--Title-->
-          <mdb-card-title>
-            <h4>{{fighter.name}}</h4>
-          </mdb-card-title>
-      
-          <!--Text-->
-          <mdb-card-text>
-            <p>Damage: {{fighter.dmg}}</p>
-            <p>Speed: {{fighter.speed}}</p>
-            <form [formGroup]="changeNameForm">
-              <div>
-                <label for="changeName">New name</label>
-                <input formControlName="name" type="text" id="changeName" required />
-              </div>
-              <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="onSubmit(fighter.id)">Confirm</button>
-            </form>
-          </mdb-card-text>
-        </mdb-card-body>
-      </mdb-card>
+    <div class="row">
+      <!-- We put col-3 because the max is col-12 and we want show 4 elements by row -->
+      <div *ngFor="let fighter of fighters" class="col-3">
+        <mdb-card>
+          <!--Card image-->
+          <mdb-card-img
+            src="../../../assets/images/Dungeon.Fighter.Online.full.417211.jpg"
+            alt="Card image cap"
+          ></mdb-card-img>
+          <!--Card content-->
+          <mdb-card-body>
+            <!--Title-->
+            <mdb-card-title>
+              <h4>{{ fighter.name }}</h4>
+            </mdb-card-title>
+
+            <!--Text-->
+            <mdb-card-text>
+              <p>Damage: {{ fighter.dmg }}</p>
+              <p>Speed: {{ fighter.speed }}</p>
+              <form [formGroup]="changeNameForm">
+                <div>
+                  <label for="changeName">New name</label>
+                  <input
+                    formControlName="name"
+                    type="text"
+                    id="changeName"
+                    required
+                  />
+                </div>
+                <button
+                  type="button"
+                  mdbBtn
+                  color="primary"
+                  mdbWavesEffect
+                  (click)="onSubmit(fighter.id)"
+                >
+                  Confirm
+                </button>
+              </form>
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
     </div>
   </div>
 </div>
