@@ -17,13 +17,17 @@ export class ContractService {
   private Web3 = require('web3');
 
   private fighterContract: any;
+  private MLDTokenContract: any;
 
-  private tokenAbi = require('../../assets/abi/MainFighter.json');
-  private contractAddress = '0x1D11f65E5dB5A30af235675B646C83ED74Ec14b4';
-  private symbol = 'FT';
-  private decimals = 0;
+  private tokenAbiNft = require('../../assets/abi/MainFighter.json');
+  private tokenAbiMDL = require('../../assets/abi/MLDToken.json');
+  private contractAddressNft = '0x7Fc8F77d078dCA5F3413Af051BA5B758fdF9A7dA';
+  private contractAddressToken = '0xA478F77A4690bF31dAc73E7325eDB032197523B0';
+  private symbolNft = 'FT';
+  private decimalsNft = 0;
+  private symbolToken = 'MLD';
+  private decimalsToken = 18;
   private web3: any;
-  private tokenContract: any;
   private userAccount: any = [];
 
   constructor(protected alertService: AlertService, protected errors: ErrorsService) {
@@ -95,11 +99,11 @@ export class ContractService {
       const wasAdded = await ethereum.request({
         method: 'wallet_watchAsset',
         params: {
-          type: 'ERC721', // Initially only supports ERC20, but eventually more!
+          type: 'ERC20', // Initially only supports ERC20, but eventually more!
           options: {
-            address: this.contractAddress, // The address that the token is at.
-            symbol: this.symbol, // A ticker symbol or shorthand, up to 5 chars.
-            decimals: this.decimals, // The number of decimals in the token
+            address: this.contractAddressToken, // The address that the token is at.
+            symbol: this.symbolToken, // A ticker symbolNft or shorthand, up to 5 chars.
+            decimals: this.decimalsToken, // The number of decimalsNft in the token
             image: '', // A string url of the token logo
           },
         },
@@ -139,7 +143,8 @@ export class ContractService {
   }
 
   async connectContract() {
-    this.fighterContract = new this.web3.eth.Contract(this.tokenAbi.abi, this.contractAddress);
+    this.fighterContract = new this.web3.eth.Contract(this.tokenAbiNft.abi, this.contractAddressNft);
+    this.MLDTokenContract = new this.web3.eth.Contract(this.tokenAbiMDL.abi, this.contractAddressToken);
   }
 
   async getUserBalance() {
@@ -188,6 +193,22 @@ export class ContractService {
   async transferBalanceToOwner() {
     try {
       await this.fighterContract.methods.getContractBalance().send({ from: this.userAccount[0]});
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async getTokenBalance() {
+    try {
+      return await this.MLDTokenContract.methods.balanceOf(this.userAccount[0]).call();
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async transferTokenFrom(to: string, amount: number) {
+    try {
+      return await this.MLDTokenContract.methods.transferFrom(this.userAccount[0], to, amount);
     } catch (e) {
       this.errors.throwError(e);
     }

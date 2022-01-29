@@ -17,6 +17,11 @@ export class NftComponent implements OnInit {
 
   changeNameForm = this.formBuilder.group({
     name: '',
+  });
+  
+  transferToken = this.formBuilder.group({
+    to: '',
+    amount: 0
   })
 
   constructor(private formBuilder: FormBuilder, protected contractService: ContractService) { }
@@ -58,6 +63,16 @@ export class NftComponent implements OnInit {
 
   async getBalanceFromContract() {
     await this.contractService.transferBalanceToOwner();
+  }
+
+  async getTokenBalance() {
+    const amountToken = await this.contractService.getTokenBalance();
+    console.log(amountToken);
+  }
+
+  async transferTokenTo() {
+    const result = await this.contractService.transferTokenFrom(this.transferToken.value.to, this.transferToken.value.amount);
+    console.log(result);
   }
 
 }

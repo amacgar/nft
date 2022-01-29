@@ -47,6 +47,44 @@
   >
     Transfer balance to owner
   </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getTokenBalance()"
+  >
+    Get amount token
+  </button>
+  <form [formGroup]="transferToken">
+    <div>
+      <label for="to">To</label>
+      <input
+        formControlName="to"
+        type="text"
+        id="to"
+        required
+      />
+    </div>
+    <div>
+      <label for="amount">Amount</label>
+      <input
+        formControlName="amount"
+        type="number"
+        id="amount"
+        required
+      />
+    </div>
+    <button
+      type="button"
+      mdbBtn
+      color="primary"
+      mdbWavesEffect
+      (click)="transferTokenTo()"
+    >
+      Confirm
+    </button>
+  </form>
   <div>
     <div class="row">
       <!-- We put col-3 because the max is col-12 and we want show 4 elements by row -->
