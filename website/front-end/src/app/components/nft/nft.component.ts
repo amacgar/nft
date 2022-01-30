@@ -24,6 +24,11 @@ export class NftComponent implements OnInit {
     amount: 0
   })
 
+  createTokens = this.formBuilder.group({
+    to: '',
+    amount: 0
+  })
+
   constructor(private formBuilder: FormBuilder, protected contractService: ContractService) { }
 
   ngOnInit(): void {
@@ -71,8 +76,17 @@ export class NftComponent implements OnInit {
   }
 
   async transferTokenTo() {
-    const result = await this.contractService.transferTokenFrom(this.transferToken.value.to, this.transferToken.value.amount);
+    const result = await this.contractService.transferToken(this.transferToken.value.to, this.transferToken.value.amount);
     console.log(result);
   }
 
+  async createTokensTo() {
+    const result = await this.contractService.createTokens(this.createTokens.value.to, this.createTokens.value.amount);
+    console.log(result);
+  }
+
+  async getOwner() {
+    const owner = await this.contractService.getOwner();
+    console.log(owner);
+  }
 }

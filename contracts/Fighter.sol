@@ -20,7 +20,7 @@ contract Fighter{
     mapping (uint => address) fighterOwner;
     mapping (address => uint[]) ownerFighters;
 
-    function generateFighter() public returns(uint256){ // TODO cambiarla de public a internal
+    function generateFighter() returns(uint256){ // TODO cambiarla de public a internal
         uint id = fighters.length + 1;
         uint8 dmg = uint8(generateRandomNumber(249));
         uint8 speed = uint8(generateRandomNumber(99));

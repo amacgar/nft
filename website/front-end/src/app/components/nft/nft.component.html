@@ -56,6 +56,44 @@
   >
     Get amount token
   </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getOwner()"
+  >
+    Get owner
+  </button>
+  <form [formGroup]="createTokens">
+    <div>
+      <label for="to">To</label>
+      <input
+        formControlName="to"
+        type="text"
+        id="to"
+        required
+      />
+    </div>
+    <div>
+      <label for="amount">Amount</label>
+      <input
+        formControlName="amount"
+        type="number"
+        id="amount"
+        required
+      />
+    </div>
+    <button
+      type="button"
+      mdbBtn
+      color="primary"
+      mdbWavesEffect
+      (click)="createTokensTo()"
+    >
+      Create
+    </button>
+  </form>
   <form [formGroup]="transferToken">
     <div>
       <label for="to">To</label>
@@ -82,7 +120,7 @@
       mdbWavesEffect
       (click)="transferTokenTo()"
     >
-      Confirm
+      Send
     </button>
   </form>
   <div>

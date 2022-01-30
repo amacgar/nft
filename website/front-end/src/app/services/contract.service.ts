@@ -21,8 +21,8 @@ export class ContractService {
 
   private tokenAbiNft = require('../../assets/abi/MainFighter.json');
   private tokenAbiMDL = require('../../assets/abi/MLDToken.json');
-  private contractAddressNft = '0x7Fc8F77d078dCA5F3413Af051BA5B758fdF9A7dA';
-  private contractAddressToken = '0xA478F77A4690bF31dAc73E7325eDB032197523B0';
+  private contractAddressNft = '0x3920300cD14e6b5f4CedA14Ed2Ba86856c0f5337';
+  private contractAddressToken = '0x5FBF02F9CC67A0ae7ae27746772Ba3fa248bD1d9';
   private symbolNft = 'FT';
   private decimalsNft = 0;
   private symbolToken = 'MLD';
@@ -206,9 +206,25 @@ export class ContractService {
     }
   }
 
-  async transferTokenFrom(to: string, amount: number) {
+  async transferToken(to: string, amount: number) {
     try {
-      return await this.MLDTokenContract.methods.transferFrom(this.userAccount[0], to, amount);
+      return await this.MLDTokenContract.methods.transfer(to, amount).send({ from: this.userAccount[0] });
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async createTokens(to: string, amount: number) {
+    try {
+      return await this.MLDTokenContract.methods.generateToken(to, amount).send({ from: this.userAccount[0] });
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async getOwner() {
+    try {
+      return await this.MLDTokenContract.methods.owner().call();
     } catch (e) {
       this.errors.throwError(e);
     }
