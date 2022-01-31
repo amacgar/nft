@@ -123,6 +123,35 @@
       Send
     </button>
   </form>
+  <form [formGroup]="buyTokens">
+    <div>
+      <label for="to">To</label>
+      <input
+        formControlName="to"
+        type="text"
+        id="to"
+        required
+      />
+    </div>
+    <div>
+      <label for="amountEther">Amount Ether</label>
+      <input
+        formControlName="amountEther"
+        type="number"
+        id="amountEther"
+        required
+      />
+    </div>
+    <button
+      type="button"
+      mdbBtn
+      color="primary"
+      mdbWavesEffect
+      (click)="buyToken()"
+    >
+      Buy token
+    </button>
+  </form>
   <div>
     <div class="row">
       <!-- We put col-3 because the max is col-12 and we want show 4 elements by row -->

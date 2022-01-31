@@ -21,12 +21,12 @@ export class ContractService {
 
   private tokenAbiNft = require('../../assets/abi/MainFighter.json');
   private tokenAbiMDL = require('../../assets/abi/MLDToken.json');
-  private contractAddressNft = '0x3920300cD14e6b5f4CedA14Ed2Ba86856c0f5337';
-  private contractAddressToken = '0x5FBF02F9CC67A0ae7ae27746772Ba3fa248bD1d9';
+  private contractAddressNft = '0xFD7611171E388988ccA82005227261309b65Af98';
+  private contractAddressToken = '0xC4Bb5619a5e75f29F3F1caE83C35CD993b278C31';
   private symbolNft = 'FT';
   private decimalsNft = 0;
   private symbolToken = 'MLD';
-  private decimalsToken = 18;
+  private decimalsToken = 4;
   private web3: any;
   private userAccount: any = [];
 
@@ -225,6 +225,14 @@ export class ContractService {
   async getOwner() {
     try {
       return await this.MLDTokenContract.methods.owner().call();
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async buyTokens(to: string, tokenAmount: number, ethAmount: string) {
+    try {
+      await this.MLDTokenContract.methods.buyToken(to, tokenAmount).send({ from: this.userAccount[0], value: this.web3.utils.toWei(ethAmount, 'ether')});
     } catch (e) {
       this.errors.throwError(e);
     }
