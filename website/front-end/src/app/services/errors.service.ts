@@ -19,6 +19,6 @@ export class ErrorsService {
     } else {
       this.alertService.error("Something was wrong :(", this.options);
     }
-    throw new Error("");
+    throw new Error(e);
   }
 }

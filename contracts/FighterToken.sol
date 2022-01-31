@@ -12,7 +12,7 @@ contract FighterToken is ERC721Interface, Fighter{
     string public name;
     uint8 public decimals;
 
-    constructor() public {
+    constructor() {
         name = "Fighter";
         symbol = "FT";
         decimals = 0;

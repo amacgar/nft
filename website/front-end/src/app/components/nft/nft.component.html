@@ -43,9 +43,18 @@
     mdbBtn
     color="primary"
     mdbWavesEffect
-    (click)="getBalanceFromContract()"
+    (click)="getBalanceFromNftContract()"
   >
-    Transfer balance to owner
+    Transfer NFT balance to owner
+  </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getBalanceFromTokenContract()"
+  >
+    Transfer Token balance to owner
   </button>
   <button
     type="button"
@@ -56,6 +65,44 @@
   >
     Get amount token
   </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getOwner()"
+  >
+    Get owner
+  </button>
+  <form [formGroup]="createTokens">
+    <div>
+      <label for="to">To</label>
+      <input
+        formControlName="to"
+        type="text"
+        id="to"
+        required
+      />
+    </div>
+    <div>
+      <label for="amount">Amount</label>
+      <input
+        formControlName="amount"
+        type="number"
+        id="amount"
+        required
+      />
+    </div>
+    <button
+      type="button"
+      mdbBtn
+      color="primary"
+      mdbWavesEffect
+      (click)="createTokensTo()"
+    >
+      Create
+    </button>
+  </form>
   <form [formGroup]="transferToken">
     <div>
       <label for="to">To</label>
@@ -82,7 +129,36 @@
       mdbWavesEffect
       (click)="transferTokenTo()"
     >
-      Confirm
+      Send
+    </button>
+  </form>
+  <form [formGroup]="buyTokens">
+    <div>
+      <label for="to">To</label>
+      <input
+        formControlName="to"
+        type="text"
+        id="to"
+        required
+      />
+    </div>
+    <div>
+      <label for="amountEther">Amount Ether</label>
+      <input
+        formControlName="amountEther"
+        type="number"
+        id="amountEther"
+        required
+      />
+    </div>
+    <button
+      type="button"
+      mdbBtn
+      color="primary"
+      mdbWavesEffect
+      (click)="buyToken()"
+    >
+      Buy token
     </button>
   </form>
   <div>

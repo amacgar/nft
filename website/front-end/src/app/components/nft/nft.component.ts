@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ContractService } from 'src/app/services/contract.service';
+import { HttpClient } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 import Web3 from 'web3';
 
 @Component({
@@ -13,6 +15,8 @@ export class NftComponent implements OnInit {
   public rounded: boolean = true;
   public outline: boolean = true;
 
+  private tokenDecimals = 4;
+  
   public fighters: any;
 
   changeNameForm = this.formBuilder.group({
@@ -22,12 +26,21 @@ export class NftComponent implements OnInit {
   transferToken = this.formBuilder.group({
     to: '',
     amount: 0
+  });
+
+  createTokens = this.formBuilder.group({
+    to: '',
+    amount: 0
+  });
+
+  buyTokens = this.formBuilder.group({
+    to: '',
+    amountEther: 0
   })
 
-  constructor(private formBuilder: FormBuilder, protected contractService: ContractService) { }
+  constructor(private formBuilder: FormBuilder, protected contractService: ContractService, private http: HttpClient) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   async buyFighter() {
     try {
@@ -61,18 +74,61 @@ export class NftComponent implements OnInit {
     console.log(events);
   }
 
-  async getBalanceFromContract() {
-    await this.contractService.transferBalanceToOwner();
+  async getBalanceFromNftContract() {
+    await this.contractService.transferBalanceNftToOwner();
+  }
+
+  async getBalanceFromTokenContract() {
+    await this.contractService.transferBalanceTokenToOwner();
   }
 
   async getTokenBalance() {
     const amountToken = await this.contractService.getTokenBalance();
-    console.log(amountToken);
+    console.log(amountToken / 10 ** this.tokenDecimals);
   }
 
   async transferTokenTo() {
-    const result = await this.contractService.transferTokenFrom(this.transferToken.value.to, this.transferToken.value.amount);
+    const result = await this.contractService.transferToken(this.transferToken.value.to, this.transferToken.value.amount);
     console.log(result);
   }
 
+  async createTokensTo() {
+    const result = await this.contractService.createTokens(this.createTokens.value.to, this.createTokens.value.amount);
+    console.log(result);
+  }
+
+  async getOwner() {
+    const owner = await this.contractService.getOwner();
+    console.log(owner);
+  }
+
+  async buyToken() {
+    const tokenAmount = await this.convertEtherToToken(this.buyTokens.value.amountEther);
+    await this.contractService.buyTokens(this.buyTokens.value.to, tokenAmount, this.buyTokens.value.amountEther.toString());
+    console.log(`You bought ${tokenAmount / 10 ** this.tokenDecimals} MLD`);
+  }
+
+  async convertEtherToToken(ethAmount: number) {
+    try {
+      const result: any = await lastValueFrom(this.getEtherPrice());
+      const ethPrice: number = result.data.market_data.price_usd;
+      const amountToken: number = (ethAmount * ethPrice) * (10 ** 4);
+      if (amountToken > 0.0001) {
+        return Math.floor(amountToken);
+      }
+      return 0;
+    } catch (e) {
+      console.log(e);
+      return 0;
+    }
+  }
+
+  getEtherPrice() {
+    return this.http.get('https://data.messari.io/api/v1/assets/eth/metrics');
+  }
+
+  countDecimals(num: number) {
+    if(Math.floor(num) === num) return 0;
+    return num.toString().split(".")[1].length || 0; 
+  }
 }

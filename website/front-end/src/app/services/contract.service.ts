@@ -21,12 +21,12 @@ export class ContractService {
 
   private tokenAbiNft = require('../../assets/abi/MainFighter.json');
   private tokenAbiMDL = require('../../assets/abi/MLDToken.json');
-  private contractAddressNft = '0x7Fc8F77d078dCA5F3413Af051BA5B758fdF9A7dA';
-  private contractAddressToken = '0xA478F77A4690bF31dAc73E7325eDB032197523B0';
+  private contractAddressNft = '0x65bfebC0A961E02b9358d7903c3bA189303540Fc';
+  private contractAddressToken = '0x53e1996dd5E2a317fa66381068AFE2cFcfFF27c8';
   private symbolNft = 'FT';
   private decimalsNft = 0;
   private symbolToken = 'MLD';
-  private decimalsToken = 18;
+  private decimalsToken = 4;
   private web3: any;
   private userAccount: any = [];
 
@@ -147,10 +147,6 @@ export class ContractService {
     this.MLDTokenContract = new this.web3.eth.Contract(this.tokenAbiMDL.abi, this.contractAddressToken);
   }
 
-  async getUserBalance() {
-    
-  }
-
   async buyFighter() {
     try {
       await this.fighterContract.methods.buyFighter().send({ from: this.userAccount[0], value: this.web3.utils.toWei('0.01', 'ether')});
@@ -190,9 +186,17 @@ export class ContractService {
     }
   }
 
-  async transferBalanceToOwner() {
+  async transferBalanceNftToOwner() {
     try {
       await this.fighterContract.methods.getContractBalance().send({ from: this.userAccount[0]});
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async transferBalanceTokenToOwner() {
+    try {
+      await this.MLDTokenContract.methods.getContractBalance().send({ from: this.userAccount[0]});
     } catch (e) {
       this.errors.throwError(e);
     }
@@ -206,9 +210,33 @@ export class ContractService {
     }
   }
 
-  async transferTokenFrom(to: string, amount: number) {
+  async transferToken(to: string, amount: number) {
     try {
-      return await this.MLDTokenContract.methods.transferFrom(this.userAccount[0], to, amount);
+      return await this.MLDTokenContract.methods.transfer(to, amount).send({ from: this.userAccount[0] });
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async createTokens(to: string, amount: number) {
+    try {
+      return await this.MLDTokenContract.methods.generateToken(to, amount).send({ from: this.userAccount[0] });
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async getOwner() {
+    try {
+      return await this.MLDTokenContract.methods.owner().call();
+    } catch (e) {
+      this.errors.throwError(e);
+    }
+  }
+
+  async buyTokens(to: string, tokenAmount: number, ethAmount: string) {
+    try {
+      await this.MLDTokenContract.methods.buyToken(to, tokenAmount).send({ from: this.userAccount[0], value: this.web3.utils.toWei(ethAmount, 'ether')});
     } catch (e) {
       this.errors.throwError(e);
     }
