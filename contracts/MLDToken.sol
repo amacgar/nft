@@ -20,8 +20,24 @@ contract MLDToken is ERC20, Ownable {
         _mint(_to, tokenConverted);
     }
 
-    function _convertTokenWithDecimals(uint256 _amount) private view returns(uint256) {
+    function _convertTokenWithDecimals(uint256 _amount) private pure returns(uint256) {
         return _amount * 10**decimals();
     }
 
+    function decimals() override public pure returns(uint8) {
+        return 4;
+    }
+
+    function buyToken(address _to, uint256 _amount) public payable {
+        require(msg.value > 0 ether, "You should send ethereum to buy MLD token");
+        if (_amount == 0) {
+            payable(msg.sender).transfer(msg.value);
+            return;
+        }
+        _mint(_to, _amount);
+    }
+
+    function getContractBalance() public payable onlyOwner{
+        payable(owner()).transfer(address(this).balance);
+    }
 }

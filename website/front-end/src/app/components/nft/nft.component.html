@@ -43,9 +43,18 @@
     mdbBtn
     color="primary"
     mdbWavesEffect
-    (click)="getBalanceFromContract()"
+    (click)="getBalanceFromNftContract()"
   >
-    Transfer balance to owner
+    Transfer NFT balance to owner
+  </button>
+  <button
+    type="button"
+    mdbBtn
+    color="primary"
+    mdbWavesEffect
+    (click)="getBalanceFromTokenContract()"
+  >
+    Transfer Token balance to owner
   </button>
   <button
     type="button"

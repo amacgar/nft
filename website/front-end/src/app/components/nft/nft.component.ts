@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ContractService } from 'src/app/services/contract.service';
 import { HttpClient } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 import Web3 from 'web3';
 
 @Component({
@@ -13,12 +14,10 @@ export class NftComponent implements OnInit {
 
   public rounded: boolean = true;
   public outline: boolean = true;
+
+  private tokenDecimals = 4;
   
-  private client: any;
-
   public fighters: any;
-
-  private tokenAmount = 0;
 
   changeNameForm = this.formBuilder.group({
     name: '',
@@ -39,24 +38,9 @@ export class NftComponent implements OnInit {
     amountEther: 0
   })
 
-  constructor(private formBuilder: FormBuilder, protected contractService: ContractService, private http: HttpClient) {
-    // const coinbase = require('coinbase').Client;
-    // const credentials = require('../../../../secrets.json');
-    // this.client = new coinbase({
-    //   'apiKey': credentials.apiKey,
-    //   'apiSecret': credentials.apiSecret,
-    //   'version': '2010-04-20',
-    //   'strictSSL': false
-    // });
-    // const CoinbasePro = require('coinbase-pro');
-    // this.client = new CoinbasePro.PublicClient();
-  }
+  constructor(private formBuilder: FormBuilder, protected contractService: ContractService, private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.getEtherPrice().subscribe(result => {
-      console.log(result);
-    })
-  }
+  ngOnInit(): void {}
 
   async buyFighter() {
     try {
@@ -90,13 +74,17 @@ export class NftComponent implements OnInit {
     console.log(events);
   }
 
-  async getBalanceFromContract() {
-    await this.contractService.transferBalanceToOwner();
+  async getBalanceFromNftContract() {
+    await this.contractService.transferBalanceNftToOwner();
+  }
+
+  async getBalanceFromTokenContract() {
+    await this.contractService.transferBalanceTokenToOwner();
   }
 
   async getTokenBalance() {
     const amountToken = await this.contractService.getTokenBalance();
-    console.log(amountToken);
+    console.log(amountToken / 10 ** this.tokenDecimals);
   }
 
   async transferTokenTo() {
@@ -116,26 +104,26 @@ export class NftComponent implements OnInit {
 
   async buyToken() {
     const tokenAmount = await this.convertEtherToToken(this.buyTokens.value.amountEther);
-    await this.contractService.buyTokens(this.buyTokens.value.to, this.tokenAmount, this.buyTokens.value.amountEther.toString());
+    await this.contractService.buyTokens(this.buyTokens.value.to, tokenAmount, this.buyTokens.value.amountEther.toString());
+    console.log(`You bought ${tokenAmount / 10 ** this.tokenDecimals} MLD`);
   }
 
   async convertEtherToToken(ethAmount: number) {
-    // let converted: number = 0;
-    // await this.client.getSpotPrice({'currencyPair': 'ETH-USD'}, (err: any, price: any) => {
-    //   if (price) {
-    //     const amountToken = ethAmount * price;
-    //     if (this.countDecimals(amountToken) < 4) {
-    //       converted = amountToken;
-    //     }
-    //   } else {
-    //     console.log(err);
-    //   }
-    // });
-    // return converted;
+    try {
+      const result: any = await lastValueFrom(this.getEtherPrice());
+      const ethPrice: number = result.data.market_data.price_usd;
+      const amountToken: number = (ethAmount * ethPrice) * (10 ** 4);
+      if (amountToken > 0.0001) {
+        return Math.floor(amountToken);
+      }
+      return 0;
+    } catch (e) {
+      console.log(e);
+      return 0;
+    }
   }
 
   getEtherPrice() {
-    // return this.http.get('http://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
     return this.http.get('https://data.messari.io/api/v1/assets/eth/metrics');
   }
 
