@@ -7,22 +7,22 @@
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "27:238:2:-:0;;;115:10;93:32;;27:238;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "27:238:2:-:0;;;;;",
+  "sourceMap": "27:238:4:-:0;;;115:10;93:32;;27:238;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "27:238:4:-:0;;;;;",
   "source": "pragma solidity ^0.8.9;\r\n\r\ncontract FighterUtils { // Create the modifier for the fee\r\n\r\n    uint256 private fee = 0.01 ether;\r\n\r\n    modifier checkFee {\r\n        require(msg.value == fee, 'You dont have enough fee for the transaction');\r\n        _;\r\n    }\r\n    \r\n}",
-  "sourcePath": "C:\\Users\\alber\\Desktop\\solidityApp\\nft\\contracts\\FighterUtils.sol",
+  "sourcePath": "C:\\Users\\alber\\Desktop\\nft\\contracts\\FighterUtils.sol",
   "ast": {
     "absolutePath": "project:/contracts/FighterUtils.sol",
     "exportedSymbols": {
       "FighterUtils": [
-        407
+        696
       ]
     },
-    "id": 408,
+    "id": 697,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 391,
+        "id": 680,
         "literals": [
           "solidity",
           "^",
@@ -30,7 +30,7 @@
           ".9"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:2"
+        "src": "0:23:4"
       },
       {
         "abstract": false,
@@ -39,23 +39,23 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 407,
+        "id": 696,
         "linearizedBaseContracts": [
-          407
+          696
         ],
         "name": "FighterUtils",
-        "nameLocation": "36:12:2",
+        "nameLocation": "36:12:4",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 394,
+            "id": 683,
             "mutability": "mutable",
             "name": "fee",
-            "nameLocation": "109:3:2",
+            "nameLocation": "109:3:4",
             "nodeType": "VariableDeclaration",
-            "scope": 407,
-            "src": "93:32:2",
+            "scope": 696,
+            "src": "93:32:4",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -63,10 +63,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 392,
+              "id": 681,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "93:7:2",
+              "src": "93:7:4",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -74,14 +74,14 @@
             },
             "value": {
               "hexValue": "302e3031",
-              "id": 393,
+              "id": 682,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "115:10:2",
+              "src": "115:10:4",
               "subdenomination": "ether",
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_10000000000000000_by_1",
@@ -93,9 +93,9 @@
           },
           {
             "body": {
-              "id": 405,
+              "id": 694,
               "nodeType": "Block",
-              "src": "152:104:2",
+              "src": "152:104:4",
               "statements": [
                 {
                   "expression": {
@@ -105,32 +105,32 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 400,
+                        "id": 689,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "expression": {
-                            "id": 397,
+                            "id": 686,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967281,
-                            "src": "171:3:2",
+                            "src": "171:3:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 398,
+                          "id": 687,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "value",
                           "nodeType": "MemberAccess",
-                          "src": "171:9:2",
+                          "src": "171:9:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -139,18 +139,18 @@
                         "nodeType": "BinaryOperation",
                         "operator": "==",
                         "rightExpression": {
-                          "id": 399,
+                          "id": 688,
                           "name": "fee",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 394,
-                          "src": "184:3:2",
+                          "referencedDeclaration": 683,
+                          "src": "184:3:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "171:16:2",
+                        "src": "171:16:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -158,14 +158,14 @@
                       },
                       {
                         "hexValue": "596f7520646f6e74206861766520656e6f7567682066656520666f7220746865207472616e73616374696f6e",
-                        "id": 401,
+                        "id": 690,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "189:46:2",
+                        "src": "189:46:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_273621b5c587695f81850d75fe357e4132a285da772e8483f180806e2a9bbf88",
                           "typeString": "literal_string \"You dont have enough fee for the transaction\""
@@ -184,7 +184,7 @@
                           "typeString": "literal_string \"You dont have enough fee for the transaction\""
                         }
                       ],
-                      "id": 396,
+                      "id": 685,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -192,13 +192,13 @@
                         4294967278
                       ],
                       "referencedDeclaration": 4294967278,
-                      "src": "163:7:2",
+                      "src": "163:7:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 402,
+                    "id": 691,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -206,58 +206,58 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "163:73:2",
+                    "src": "163:73:4",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 403,
+                  "id": 692,
                   "nodeType": "ExpressionStatement",
-                  "src": "163:73:2"
+                  "src": "163:73:4"
                 },
                 {
-                  "id": 404,
+                  "id": 693,
                   "nodeType": "PlaceholderStatement",
-                  "src": "247:1:2"
+                  "src": "247:1:4"
                 }
               ]
             },
-            "id": 406,
+            "id": 695,
             "name": "checkFee",
-            "nameLocation": "143:8:2",
+            "nameLocation": "143:8:4",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 395,
+              "id": 684,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "152:0:2"
+              "src": "152:0:4"
             },
-            "src": "134:122:2",
+            "src": "134:122:4",
             "virtual": false,
             "visibility": "internal"
           }
         ],
-        "scope": 408,
-        "src": "27:238:2",
+        "scope": 697,
+        "src": "27:238:4",
         "usedErrors": []
       }
     ],
-    "src": "0:265:2"
+    "src": "0:265:4"
   },
   "legacyAST": {
     "absolutePath": "project:/contracts/FighterUtils.sol",
     "exportedSymbols": {
       "FighterUtils": [
-        407
+        696
       ]
     },
-    "id": 408,
+    "id": 697,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 391,
+        "id": 680,
         "literals": [
           "solidity",
           "^",
@@ -265,7 +265,7 @@
           ".9"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:2"
+        "src": "0:23:4"
       },
       {
         "abstract": false,
@@ -274,23 +274,23 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 407,
+        "id": 696,
         "linearizedBaseContracts": [
-          407
+          696
         ],
         "name": "FighterUtils",
-        "nameLocation": "36:12:2",
+        "nameLocation": "36:12:4",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 394,
+            "id": 683,
             "mutability": "mutable",
             "name": "fee",
-            "nameLocation": "109:3:2",
+            "nameLocation": "109:3:4",
             "nodeType": "VariableDeclaration",
-            "scope": 407,
-            "src": "93:32:2",
+            "scope": 696,
+            "src": "93:32:4",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -298,10 +298,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 392,
+              "id": 681,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "93:7:2",
+              "src": "93:7:4",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -309,14 +309,14 @@
             },
             "value": {
               "hexValue": "302e3031",
-              "id": 393,
+              "id": 682,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "115:10:2",
+              "src": "115:10:4",
               "subdenomination": "ether",
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_10000000000000000_by_1",
@@ -328,9 +328,9 @@
           },
           {
             "body": {
-              "id": 405,
+              "id": 694,
               "nodeType": "Block",
-              "src": "152:104:2",
+              "src": "152:104:4",
               "statements": [
                 {
                   "expression": {
@@ -340,32 +340,32 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 400,
+                        "id": 689,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "expression": {
-                            "id": 397,
+                            "id": 686,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967281,
-                            "src": "171:3:2",
+                            "src": "171:3:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 398,
+                          "id": 687,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "value",
                           "nodeType": "MemberAccess",
-                          "src": "171:9:2",
+                          "src": "171:9:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -374,18 +374,18 @@
                         "nodeType": "BinaryOperation",
                         "operator": "==",
                         "rightExpression": {
-                          "id": 399,
+                          "id": 688,
                           "name": "fee",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 394,
-                          "src": "184:3:2",
+                          "referencedDeclaration": 683,
+                          "src": "184:3:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "171:16:2",
+                        "src": "171:16:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -393,14 +393,14 @@
                       },
                       {
                         "hexValue": "596f7520646f6e74206861766520656e6f7567682066656520666f7220746865207472616e73616374696f6e",
-                        "id": 401,
+                        "id": 690,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "189:46:2",
+                        "src": "189:46:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_273621b5c587695f81850d75fe357e4132a285da772e8483f180806e2a9bbf88",
                           "typeString": "literal_string \"You dont have enough fee for the transaction\""
@@ -419,7 +419,7 @@
                           "typeString": "literal_string \"You dont have enough fee for the transaction\""
                         }
                       ],
-                      "id": 396,
+                      "id": 685,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -427,13 +427,13 @@
                         4294967278
                       ],
                       "referencedDeclaration": 4294967278,
-                      "src": "163:7:2",
+                      "src": "163:7:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 402,
+                    "id": 691,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -441,45 +441,45 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "163:73:2",
+                    "src": "163:73:4",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 403,
+                  "id": 692,
                   "nodeType": "ExpressionStatement",
-                  "src": "163:73:2"
+                  "src": "163:73:4"
                 },
                 {
-                  "id": 404,
+                  "id": 693,
                   "nodeType": "PlaceholderStatement",
-                  "src": "247:1:2"
+                  "src": "247:1:4"
                 }
               ]
             },
-            "id": 406,
+            "id": 695,
             "name": "checkFee",
-            "nameLocation": "143:8:2",
+            "nameLocation": "143:8:4",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 395,
+              "id": 684,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "152:0:2"
+              "src": "152:0:4"
             },
-            "src": "134:122:2",
+            "src": "134:122:4",
             "virtual": false,
             "visibility": "internal"
           }
         ],
-        "scope": 408,
-        "src": "27:238:2",
+        "scope": 697,
+        "src": "27:238:4",
         "usedErrors": []
       }
     ],
-    "src": "0:265:2"
+    "src": "0:265:4"
   },
   "compiler": {
     "name": "solc",
@@ -487,7 +487,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-16T01:01:18.345Z",
+  "updatedAt": "2022-01-31T19:37:32.107Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

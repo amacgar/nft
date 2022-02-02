@@ -15,7 +15,8 @@ contract('MainFighter', function () {
 
   // Test case
   it('Return array of fighters previously created some fighter', async function () {
-      await this.mainFighter.buyFighter({value: web3.utils.toWei('0.01', 'ether')});
+      const account = web3.eth.accounts[0];
+      await this.mainFighter.buyFighter({from: account, value: web3.utils.toWei('0.01', 'ether')});
       
       const fighters = await this.mainFighter.getFighters();
       expect(fighters.length).equal(1);

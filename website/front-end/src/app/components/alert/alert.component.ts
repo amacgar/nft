@@ -31,7 +31,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
                 // auto close alert if required
                 if (alert.autoClose) {
-                    setTimeout(() => this.removeAlert(alert), 3000);
+                    setTimeout(() => this.removeAlert(alert), 5000);
                 }
            });
 
@@ -81,6 +81,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         }
 
         classes.push(alertTypeClass[alert.type]);
+        classes.push('text-center');
 
         if (alert.fade) {
             classes.push('fade');
